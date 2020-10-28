@@ -27,7 +27,7 @@ class MainTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {10,20,30,40})
+  @ValueSource(ints = {10,20,40,99})
   void entryPointMultyTest(int count) {
     for (int i = count; i > 0; i--) {
       String r = (random() > 0.5) ? A : B;
@@ -37,7 +37,7 @@ class MainTest {
   }
 
   @ParameterizedTest
-  @ValueSource(ints = {1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5})
+  @ValueSource(ints = {1,2,3,4,5,5,4,3,2,1,1,1,1,2,2,2,3,3,3,4,5})
   void listTest(int x) {
       dispatcher(A,x);
       dispatcher(B,x);
