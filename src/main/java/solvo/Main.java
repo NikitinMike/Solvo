@@ -22,7 +22,7 @@ public class Main {
   public static void main(String[] args) {
 
     Scanner in = new Scanner(System.in);
-    for (int i = 88; i > 0; i--) {
+    for (int i = 898; i > 0; i--) {
       dispatcher((random() > 0.5) ? A : B, (int) (random() * 9));
 //      in.next();
     }
@@ -55,19 +55,10 @@ public class Main {
       }
     }
 
-    // input attribute equals
+    // attribute equals
     if (x.equals(lastx)) {
       try {
         log.info(" SEQUENTAL {}/{} ", lastType + lastx, tx);
-        lastThread.join();
-      } catch (InterruptedException e) {
-        e.printStackTrace();
-      }
-    }
-
-    // limit queue to 5 items
-    if (qa.size() >= 5 || qb.size() >= 5) {
-      try {
         lastThread.join();
       } catch (InterruptedException e) {
         e.printStackTrace();
@@ -79,7 +70,15 @@ public class Main {
     lastx = x;
     lastType = type;
     lastThread.start();
+
+    // limit queue to 5 items
+    if (qa.size() > 5 || qb.size() > 5) {
+      try {
+        lastThread.join();
+      } catch (InterruptedException e) {
+        e.printStackTrace();
+      }
+    }
+
   }
-
 }
-

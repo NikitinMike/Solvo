@@ -25,7 +25,7 @@ class MainTest {
 
   @ParameterizedTest
   @ValueSource(ints = {10,20,30,40})
-  void entryPointMultyTest(int count) {
+  void entryPointMultyTest(int  count) {
     for (int i = count; i > 0; i--) {
       String r = (random() > 0.5) ? A : B;
       Integer a = (int) (random() * 9);
