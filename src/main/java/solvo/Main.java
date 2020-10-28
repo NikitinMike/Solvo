@@ -19,13 +19,28 @@ public class Main {
   static volatile Thread lastThread = null;
   static Integer n = 1;
 
+  static void queueMaker(String... list) {
+    for (String s : list) {
+//      System.out.println(s);
+      String[] req = s.split("(?=\\d)", 2);
+      dispatcher(req[0], Integer.parseInt(req[1]));
+    }
+  }
+
   public static void main(String[] args) {
 
+    // test - enter anyting
     Scanner in = new Scanner(System.in);
-    for (int i = 898; i > 0; i--) {
+    for (int i = 99; i > 0; i--) {
       dispatcher((random() > 0.5) ? A : B, (int) (random() * 9));
 //      in.next();
     }
+
+    // input is queue
+//    queueMaker("a1", "a2", "a3", "a4", "a5", "a6","a7","a8","a9","a0");
+//    queueMaker("b1", "b2", "b3", "b4", "b5", "b6","b7","b8","b9","b0");
+//    queueMaker("a0", "a0", "a0", "a0", "a0", "b0","b0","b0","b0","b0");
+//    queueMaker("a0", "b0", "a1", "b1", "a2", "b2","a3","b3","a4","b4");
 
     // manual data enter
 //    do {
@@ -72,7 +87,7 @@ public class Main {
     lastThread.start();
 
     // limit queue to 5 items
-    if (qa.size() > 5 || qb.size() > 5) {
+    if (qa.size() >= 5 || qb.size() >= 5) {
       try {
         lastThread.join();
       } catch (InterruptedException e) {
