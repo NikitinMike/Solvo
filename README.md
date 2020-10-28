@@ -1,6 +1,7 @@
 # Solvo
 
 >mvnw install
+
 >"c:\Program Files\Java\jdk-14.0.1\bin\java" -jar target/solvo-0.0.1-SNAPSHOT-jar-with-dependencies.jar 
 
 #Тестовое задание
