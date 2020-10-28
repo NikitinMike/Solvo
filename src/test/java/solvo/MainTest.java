@@ -15,15 +15,15 @@ class MainTest {
 
   @Test
   void entryPointTest() {
-    dispatcher("a",1);
-    dispatcher("b",1);
-    dispatcher("b",2);
-    dispatcher("a",2);
-    dispatcher("a",2);
-    dispatcher("b",3);
-    dispatcher("b",1);
-    dispatcher("a",2);
-    dispatcher("a",3);
+    dispatcher(A,1);
+    dispatcher(B,1);
+    dispatcher(B,2);
+    dispatcher(A,2);
+    dispatcher(A,2);
+    dispatcher(B,3);
+    dispatcher(A,1);
+    dispatcher(A,2);
+    dispatcher(A,3);
   }
 
   @ParameterizedTest
@@ -39,8 +39,8 @@ class MainTest {
   @ParameterizedTest
   @ValueSource(ints = {1,2,3,4,5,1,2,3,4,5,1,2,3,4,5,1,2,3,4,5})
   void listTest(int x) {
-      dispatcher("a",x);
-      dispatcher("b",x);
+      dispatcher(A,x);
+      dispatcher(B,x);
   }
 
   @Test
