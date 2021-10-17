@@ -23,7 +23,10 @@ public class Request extends Thread {
     synchronized (queue) {
       String tn = Thread.currentThread().getName();
       queue.remove(tn);
-      log.info(" <<{} {} ",type + x, queue.values());
+      log.info(" << {} {} {} ",
+          type + x,
+          type.equals(Main.B) ? " ".repeat(Main.MaxThread*4) : " ".repeat(Main.MaxThread*0),
+          queue.values());
     }
   }
 
