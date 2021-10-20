@@ -13,8 +13,8 @@ public class Main {
   final static String B = "b";
   static final Logger log = LoggerFactory.getLogger("Request");
   final static int MaxThread = 9;
-  static final HashMap qa = new HashMap();
-  static final HashMap qb = new HashMap();
+  static final HashMap<String,String> qa = new HashMap<>();
+  static final HashMap<String,String> qb = new HashMap<>();
   static volatile Integer lastx = null;
   static volatile String lastType = null;
   static volatile Thread lastThread = null;
