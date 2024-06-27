@@ -12,6 +12,7 @@ public class Main {
   final static String A = "a";
   final static String B = "b";
   static final Logger log = LoggerFactory.getLogger("Request");
+  final static int MaxThread = 9;
   static final HashMap qa = new HashMap();
   static final HashMap qb = new HashMap();
   static volatile Integer lastx = null;
@@ -31,7 +32,7 @@ public class Main {
 
     // test - enter anyting
     Scanner in = new Scanner(System.in);
-    for (int i = 99; i > 0; i--) {
+    for (int i = 88; i > 0; i--) {
       dispatcher((random() > 0.5) ? A : B, (int) (random() * 9));
 //      in.next();
     }
@@ -41,6 +42,9 @@ public class Main {
 //    queueMaker("b1", "b2", "b3", "b4", "b5", "b6","b7","b8","b9","b0");
 //    queueMaker("a0", "a0", "a0", "a0", "a0", "b0","b0","b0","b0","b0");
 //    queueMaker("a0", "b0", "a1", "b1", "a2", "b2","a3","b3","a4","b4");
+//    queueMaker("a1", "a2", "a3", "a4", "b1", "b2", "b3", "b4");
+//    queueMaker( "a5", "a6","a7","a8","a9","a0","b5", "b6","b7","b8","b9","b0");
+//    queueMaker( "a9","a0","b5", "b6","b7","b8","b9","b0");
 
     // manual data enter
 //    do {
@@ -66,7 +70,8 @@ public class Main {
         } else {
           qb.put(tn, tx);
         }
-        log.info(" {}>> {} {}", tx, qa.values(), qb.values());
+        log.info(" {}>> {} {} {}", tx, qa.values(), " ".repeat((Main.MaxThread-qa.size())*4),
+            qb.values());
       }
     }
 
@@ -87,7 +92,7 @@ public class Main {
     lastThread.start();
 
     // limit queue to 5 items
-    if (qa.size() >= 5 || qb.size() >= 5) {
+    if (qa.size() >= MaxThread || qb.size() >= MaxThread) {
       try {
         lastThread.join();
       } catch (InterruptedException e) {

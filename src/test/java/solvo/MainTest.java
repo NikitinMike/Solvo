@@ -10,8 +10,8 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 class MainTest {
 
-  final static String A = "a";
-  final static String B = "b";
+  final static String A = Main.A;
+  final static String B = Main.B;
 
   @Test
   void entryPointTest() {
