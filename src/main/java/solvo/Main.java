@@ -13,9 +13,9 @@ public class Main {
   final static String B = "b";
   static final Logger log = LoggerFactory.getLogger("Request");
   final static int MaxThread = 9;
-  static final HashMap qa = new HashMap();
-  static final HashMap qb = new HashMap();
-  static volatile Integer lastx = null;
+  static final HashMap<String,String> qa = new HashMap<>();
+  static final HashMap<String,String> qb = new HashMap<>();
+  static volatile Integer lastX = null;
   static volatile String lastType = null;
   static volatile Thread lastThread = null;
   static Integer n = 1;
@@ -30,7 +30,7 @@ public class Main {
 
   public static void main(String[] args) {
 
-    // test - enter anyting
+    // test - enter anything
     Scanner in = new Scanner(System.in);
     for (int i = 88; i > 0; i--) {
       dispatcher((random() > 0.5) ? A : B, (int) (random() * 9));
@@ -65,20 +65,16 @@ public class Main {
 
     synchronized (qa) {
       synchronized (qb) {
-        if (A.equals(type)) {
-          qa.put(tn, tx);
-        } else {
-          qb.put(tn, tx);
-        }
-        log.info(" {}>> {} {} {}", tx, qa.values(), " ".repeat((Main.MaxThread-qa.size())*4),
-            qb.values());
+        if (A.equals(type)) qa.put(tn, tx); else qb.put(tn, tx);
+        log.info(" {}>> {} {} {}", tx, qa.values(),
+                " ".repeat((Main.MaxThread-qa.size())*4), qb.values());
       }
     }
 
     // attribute equals
-    if (x.equals(lastx)) {
+    if (x.equals(lastX)) {
       try {
-        log.info(" SEQUENTAL {}/{} ", lastType + lastx, tx);
+        log.info(" SEQUENTIAL {}/{} ", lastType + lastX, tx);
         lastThread.join();
       } catch (InterruptedException e) {
         e.printStackTrace();
@@ -87,7 +83,7 @@ public class Main {
 
     lastThread = new Request(type, x, (A.equals(type)) ? qa : qb);
     lastThread.setName(tn);
-    lastx = x;
+    lastX = x;
     lastType = type;
     lastThread.start();
 
