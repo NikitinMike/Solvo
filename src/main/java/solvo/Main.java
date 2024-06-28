@@ -75,7 +75,7 @@ public class Main {
     // attribute equals
     if (x.equals(lastx)) {
       try {
-        log.info(" SEQUENTAL {}/{} ", lastType + lastx, tx);
+        log.info(" SEQUENTIAL {}/{} ", lastType + lastx, tx);
         lastThread.join();
       } catch (InterruptedException e) {
         e.printStackTrace();
