@@ -1,6 +1,5 @@
 package solvo;
 
-import java.util.HashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -10,9 +9,9 @@ public class Request extends Thread {
 
   final String type;
   final Integer x;
-  final HashMap<String,String> queue;
+  final HashQ queue;
 
-  public Request(String type, Integer x, HashMap<String,String> queue) {
+  public Request(String type, Integer x, HashQ queue) {
     this.type = type;
     this.x = x;
     this.queue = queue;
@@ -23,10 +22,8 @@ public class Request extends Thread {
     synchronized (queue) {
       String tn = Thread.currentThread().getName();
       queue.remove(tn);
-      log.info(" << {} {} {} ",
-          type + x,
-          type.equals(Main.B) ? " ".repeat(Main.MaxThread*4) : " ".repeat(0),
-          queue.values());
+      log.info(" << {} {} {} ", type + x,
+              " ".repeat(Main.MaxThread* (type.equals(Main.B) ? 4 : 0)), queue.values());
     }
   }
 
