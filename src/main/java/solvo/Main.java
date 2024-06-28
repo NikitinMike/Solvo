@@ -1,11 +1,11 @@
 package solvo;
 
-import static java.lang.Math.random;
-
-import java.util.HashMap;
-import java.util.Scanner;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.Scanner;
+
+import static java.lang.Math.random;
 
 public class Main {
 
@@ -13,8 +13,8 @@ public class Main {
   final static String B = "b";
   static final Logger log = LoggerFactory.getLogger("Request");
   final static int MaxThread = 9;
-  static final HashMap<String,String> qa = new HashMap<>();
-  static final HashMap<String,String> qb = new HashMap<>();
+  static final HashQ qa = new HashQ();
+  static final HashQ qb = new HashQ();
   static volatile Integer lastX = null;
   static volatile String lastType = null;
   static volatile Thread lastThread = null;
@@ -66,7 +66,7 @@ public class Main {
     synchronized (qa) {
       synchronized (qb) {
         if (A.equals(type)) qa.put(tn, tx); else qb.put(tn, tx);
-        log.info(" {}>> {} {} {}", tx, qa.values(),
+        log.info(" {} >> {} {} {}", tx, qa.values(),
                 " ".repeat((Main.MaxThread-qa.size())*4), qb.values());
       }
     }
@@ -81,7 +81,7 @@ public class Main {
       }
     }
 
-    lastThread = new Request(type, x, (A.equals(type)) ? qa : qb);
+    lastThread = new Request(type, x, A.equals(type) ? qa : qb);
     lastThread.setName(tn);
     lastX = x;
     lastType = type;
