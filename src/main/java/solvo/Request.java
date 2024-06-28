@@ -10,9 +10,9 @@ public class Request extends Thread {
 
   final String type;
   final Integer x;
-  final HashMap queue;
+  final HashMap<String,String> queue;
 
-  public Request(String type, Integer x, HashMap queue) {
+  public Request(String type, Integer x, HashMap<String,String> queue) {
     this.type = type;
     this.x = x;
     this.queue = queue;
